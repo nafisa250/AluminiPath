@@ -1,0 +1,127 @@
+
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Only login-specific additions — no overrides to style.css */
+
+        /* Password eye toggle */
+        .password-container {
+            position: relative;
+        }
+        .password-container input {
+            padding-right: 42px;
+        }
+        .toggle-eye {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+        .toggle-eye svg {
+            width: 18px;
+            height: 18px;
+            stroke: #888;
+            transition: stroke 0.2s;
+        }
+        .toggle-eye:hover svg {
+            stroke: var(--primary);
+        }
+
+        /* Logo */
+        .login-logo {
+            display: block;
+            margin: 0 auto 24px;
+            width: 85px;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card" style="max-width: 560px; margin-top: 0;">
+
+        <fieldset>
+            <legend style="text-align: center;">WELCOME TO SDMCET</legend>
+
+            <img src="sdmcet_logo.png" alt="SDMCET Logo" class="login-logo">
+
+            <div class="form-group">
+                <label for="username">USN:</label>
+                <input type="text" id="username" name="username" placeholder="USN" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <div class="password-container">
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                    <span class="toggle-eye" onclick="togglePassword()">
+                        <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </span>
+                </div>
+            </div>
+
+            <p class="form-footer">
+                Don't have an account? <a href="sign_up.html">Sign up</a>
+            </p>
+
+            <div class="form-actions" style="margin-top: 18px;">
+                <button type="submit" class="btn btn-primary btn-block"
+                    onclick="this.closest('form') ? this.closest('form').submit() : document.querySelector('form').submit()">
+                    Login
+                </button>
+            </div>
+
+        </fieldset>
+
+    </div>
+
+    <!-- Wrap in form for actual submission -->
+    <script>
+        // Re-wire button to the real form
+        document.addEventListener('DOMContentLoaded', function () {
+            const card = document.querySelector('.card');
+            const form = document.createElement('form');
+            form.action = 'login.php';
+            form.method = 'post';
+            card.parentNode.insertBefore(form, card);
+            form.appendChild(card);
+
+            document.querySelector('.btn-primary').addEventListener('click', function () {
+                form.submit();
+            });
+        });
+
+        function togglePassword() {
+            const password = document.getElementById("password");
+            const eyeIcon = document.getElementById("eyeIcon");
+
+            if (password.type === "password") {
+                password.type = "text";
+                eyeIcon.innerHTML = `
+                    <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20C5 20 1 12 1 12a21.77 21.77 0 0 1 5.06-6.94"/>
+                    <path d="M1 1l22 22"/>
+                `;
+            } else {
+                password.type = "password";
+                eyeIcon.innerHTML = `
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                `;
+            }
+        }
+    </script>
+
+</body>
+</html>
