@@ -1,0 +1,395 @@
+/* ============================================================
+   style.css — Reusable stylesheet for Student Web App
+   Layout: Centered card, fieldset sections, navy/pink theme
+   Import Google Fonts in your HTML <head>:
+   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+   Then link this file:
+   <link rel="stylesheet" href="style.css">
+   ============================================================ */
+
+/* ── CSS Variables ─────────────────────────────────────── */
+:root {
+  --primary:       #1a237e;   /* deep navy – headings, borders, labels */
+  --primary-light: #3949ab;   /* medium indigo – hover states           */
+  --accent:        #e53935;   /* red – required stars, error text        */
+  --bg-page:       #f8e8e8;   /* soft pink page background               */
+  --bg-card:       #ffffff;   /* card / form surface                     */
+  --bg-input:      #fdf3f3;   /* input field background                  */
+  --border:        #c5cae9;   /* default input border                    */
+  --border-focus:  #1a237e;   /* focused input border                    */
+  --text-body:     #333333;   /* body text                               */
+  --text-muted:    #757575;   /* placeholder / helper text               */
+  --radius-card:   14px;
+  --radius-input:  8px;
+  --shadow-card:   0 4px 24px rgba(26,35,126,.10);
+  --font:          'Nunito', 'Segoe UI', sans-serif;
+}
+
+/* ── Reset & Base ───────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  background-color: var(--bg-page);
+  color: var(--text-body);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 16px 60px;
+}
+
+/* ── Page Title ─────────────────────────────────────────── */
+h1.page-title {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 28px;
+  letter-spacing: .02em;
+}
+
+/* ── Main Card ──────────────────────────────────────────── */
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  width: 100%;
+  max-width: 480px;
+  padding: 36px 40px 40px;
+}
+
+/* ── Fieldset Sections ──────────────────────────────────── */
+fieldset {
+  border: 2px solid var(--primary);
+  border-radius: var(--radius-card);
+  padding: 24px 24px 20px;
+  margin-bottom: 24px;
+}
+
+fieldset:last-of-type { margin-bottom: 0; }
+
+legend {
+  font-size: .95rem;
+  font-weight: 800;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  padding: 0 10px;
+}
+
+/* ── Form Groups ────────────────────────────────────────── */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+
+.form-group:last-child { margin-bottom: 0; }
+
+label {
+  font-size: .9rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+label .required {
+  color: var(--accent);
+  margin-left: 2px;
+}
+
+/* ── Inputs, Selects, Textareas ─────────────────────────── */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="tel"],
+input[type="date"],
+input[type="url"],
+select,
+textarea {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-input);
+  padding: 10px 14px;
+  font-family: var(--font);
+  font-size: .95rem;
+  color: var(--text-body);
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+input::placeholder,
+textarea::placeholder { color: var(--text-muted); }
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(26,35,126,.12);
+}
+
+/* Select arrow */
+.select-wrapper {
+  position: relative;
+}
+
+.select-wrapper::after {
+  content: '▾';
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--primary);
+  pointer-events: none;
+  font-size: .9rem;
+}
+
+.select-wrapper select { padding-right: 36px; cursor: pointer; }
+
+textarea { resize: vertical; min-height: 90px; }
+
+/* ── Radio & Checkbox Groups ────────────────────────────── */
+.radio-group,
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  margin-top: 4px;
+}
+
+.radio-group label,
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-weight: 600;
+  color: var(--text-body);
+  cursor: pointer;
+  font-size: .9rem;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+/* ── Helper / Error Text ────────────────────────────────── */
+.helper-text {
+  font-size: .78rem;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+
+.error-text {
+  font-size: .78rem;
+  color: var(--accent);
+  margin-top: 3px;
+  display: none;
+}
+
+input.error,
+select.error,
+textarea.error {
+  border-color: var(--accent);
+}
+
+input.error ~ .error-text,
+select.error ~ .error-text,
+textarea.error ~ .error-text {
+  display: block;
+}
+
+/* ── Buttons ────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font);
+  font-size: .95rem;
+  font-weight: 700;
+  border-radius: var(--radius-input);
+  padding: 11px 26px;
+  cursor: pointer;
+  transition: background .2s, transform .1s, box-shadow .2s;
+  border: none;
+  outline: none;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+  box-shadow: 0 3px 12px rgba(26,35,126,.25);
+}
+
+.btn-primary:hover {
+  background: var(--primary-light);
+  box-shadow: 0 5px 18px rgba(26,35,126,.30);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active { transform: translateY(0); }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+}
+
+.btn-secondary:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btn-block { width: 100%; }
+
+/* ── Form Actions Row ───────────────────────────────────── */
+.form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+
+.form-actions .btn { flex: 1; min-width: 120px; }
+
+/* ── Link Text (e.g. "Already have an account?") ───────── */
+.form-footer {
+  text-align: center;
+  margin-top: 18px;
+  font-size: .88rem;
+  color: var(--text-muted);
+}
+
+.form-footer a {
+  color: var(--primary);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.form-footer a:hover { text-decoration: underline; }
+
+/* ── Alert / Info Banners ───────────────────────────────── */
+.alert {
+  border-radius: var(--radius-input);
+  padding: 12px 16px;
+  font-size: .88rem;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+.alert-info    { background: #e8eaf6; color: var(--primary); border-left: 4px solid var(--primary); }
+.alert-success { background: #e8f5e9; color: #2e7d32;        border-left: 4px solid #43a047; }
+.alert-error   { background: #ffebee; color: #c62828;        border-left: 4px solid var(--accent); }
+
+/* ── Divider ────────────────────────────────────────────── */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+  color: var(--text-muted);
+  font-size: .82rem;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── Table (for data pages) ─────────────────────────────── */
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: var(--radius-input);
+  border: 1.5px solid var(--border);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .9rem;
+}
+
+thead tr { background: var(--primary); color: #fff; }
+
+thead th {
+  padding: 11px 16px;
+  text-align: left;
+  font-weight: 700;
+  letter-spacing: .03em;
+}
+
+tbody tr { border-bottom: 1px solid var(--border); }
+tbody tr:last-child { border-bottom: none; }
+tbody tr:nth-child(even) { background: var(--bg-input); }
+
+tbody td { padding: 10px 16px; }
+
+/* ── Navigation Bar ─────────────────────────────────────── */
+.navbar {
+  width: 100%;
+  background: var(--primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  height: 58px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(26,35,126,.18);
+}
+
+.navbar-brand {
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: .04em;
+  color: #fff;
+  text-decoration: none;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 6px;
+  list-style: none;
+}
+
+.navbar-links a {
+  color: rgba(255,255,255,.85);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: .9rem;
+  padding: 6px 14px;
+  border-radius: 6px;
+  transition: background .2s;
+}
+
+.navbar-links a:hover,
+.navbar-links a.active {
+  background: rgba(255,255,255,.18);
+  color: #fff;
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
+@media (max-width: 520px) {
+  .card { padding: 24px 18px 28px; }
+  fieldset { padding: 18px 14px 14px; }
+  h1.page-title { font-size: 1.4rem; }
+  .form-actions { flex-direction: column; }
+  .navbar { padding: 0 16px; }
+}

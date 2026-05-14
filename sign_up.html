@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Higher Studies Signup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ── Signup page overrides ── */
+        body {
+            align-items: center;
+            padding: 40px 24px 60px;
+        }
+
+        /* Full-width card on laptop */
+        .card {
+            max-width: 960px;
+            width: 100%;
+            padding: 40px 48px 48px;
+        }
+
+        /* Two-column grid for the top two fieldsets */
+        .fieldset-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        /* Third fieldset spans both columns */
+        .fieldset-grid .full-width {
+            grid-column: 1 / -1;
+        }
+
+        fieldset {
+            margin-top: 0 !important;
+            height: 100%;
+        }
+
+        /* Inner two-column grid inside Higher Study fieldset */
+        .inner-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0 32px;
+        }
+
+        .inner-grid .span-2 {
+            grid-column: 1 / -1;
+        }
+
+        /* ── Tablet: single column ── */
+        @media (max-width: 720px) {
+            .card {
+                padding: 24px 18px 32px;
+            }
+            .fieldset-grid {
+                grid-template-columns: 1fr;
+            }
+            .fieldset-grid .full-width {
+                grid-column: 1;
+            }
+            .inner-grid {
+                grid-template-columns: 1fr;
+            }
+            .inner-grid .span-2 {
+                grid-column: 1;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <h1 class="page-title">Student Signup</h1>
+
+    <div class="card">
+        <form id="signupForm">
+            <div class="fieldset-grid">
+
+                <!-- Basic Information -->
+                <fieldset>
+                    <legend>Basic Information</legend>
+
+                    <div class="form-group">
+                        <label for="fullname">Full Name</label>
+                        <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" placeholder="Choose a username">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Create a password">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirm_password">Confirm Password</label>
+                        <input type="password" id="confirm_password" name="confirm_password" placeholder="Repeat your password">
+                    </div>
+                </fieldset>
+
+                <!-- Academic Details -->
+                <fieldset>
+                    <legend>Academic Details</legend>
+
+                    <div class="form-group">
+                        <label for="branch">BE Branch</label>
+                        <div class="select-wrapper">
+                            <select id="branch" name="branch">
+                                <option value="">Select your branch</option>
+                                <option>CSE</option>
+                                <option>ECE</option>
+                                <option>Mechanical</option>
+                                <option>Civil</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="grad_year">Graduation Year</label>
+                        <input type="number" id="grad_year" name="grad_year" placeholder="e.g. 2025">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dob">Date of Birth</label>
+                        <input type="date" id="dob" name="dob">
+                    </div>
+                </fieldset>
+
+                <!-- Higher Study Preference — full width -->
+                <fieldset class="full-width">
+                    <legend>Higher Study Preference</legend>
+
+                    <div class="inner-grid">
+
+                        <div class="form-group">
+                            <label>Preferred Course</label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="course" value="MS"> MS</label>
+                                <label><input type="radio" name="course" value="MBA"> MBA</label>
+                                <label><input type="radio" name="course" value="MTech"> MTech</label>
+                                <label><input type="radio" name="course" value="PhD"> PhD</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="country">Preferred Country</label>
+                            <div class="select-wrapper">
+                                <select id="country" name="country">
+                                    <option value="">Select a country</option>
+                                    <option>USA</option>
+                                    <option>Canada</option>
+                                    <option>Germany</option>
+                                    <option>UK</option>
+                                    <option>Australia</option>
+                                    <option>India</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Exams Taken</label>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox" name="exams" value="GRE"> GRE</label>
+                                <label><input type="checkbox" name="exams" value="GATE"> GATE</label>
+                                <label><input type="checkbox" name="exams" value="IELTS"> IELTS</label>
+                                <label><input type="checkbox" name="exams" value="TOEFL"> TOEFL</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="status">Application Status</label>
+                            <div class="select-wrapper">
+                                <select id="status" name="status">
+                                    <option value="">Select your current status</option>
+                                    <option>Planning</option>
+                                    <option>Applied</option>
+                                    <option>Admitted</option>
+                                    <option>Rejected</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group span-2">
+                            <label for="notes">Additional Notes</label>
+                            <textarea id="notes" name="notes" rows="3" placeholder="Any additional information..."></textarea>
+                        </div>
+
+                    </div>
+                </fieldset>
+
+            </div><!-- end .fieldset-grid -->
+
+            <!-- Buttons -->
+            <div class="form-actions">
+               <button type="button" class="btn btn-primary" onclick="goToLogin()">Sign Up</button>
+                <button type="reset" class="btn btn-secondary">Reset</button>
+            </div>
+
+            <p class="form-footer">
+                Already have an account? <a href="login_page.html">Login</a>
+            </p>
+
+        </form>
+    </div>
+    <script>
+function goToLogin() {
+    window.location.href = "login_page.html";
+}
+</script>
+    <script>
+document.getElementById("signupForm").addEventListener("submit", function(e) {
+    e.preventDefault(); // stop form from submitting
+
+    // redirect to login page
+    window.location.href = "login_page.html";
+});
+</script>
+</body>
+</html>

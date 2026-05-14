@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<style>
+/* Password eye toggle */
+.password-container {
+    position: relative;
+}
+.password-container input {
+    padding-right: 42px;
+}
+.toggle-eye {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+.toggle-eye svg {
+    width: 18px;
+    height: 18px;
+    stroke: #888;
+}
+.toggle-eye:hover svg {
+    stroke: #001f54;
+}
+
+/* Logo */
+.login-logo {
+    display: block;
+    margin: 0 auto 24px;
+    width: 85px;
+}
+</style>
+</head>
+
+<body>
+
+<form id="loginForm">
+
+<div class="card" style="max-width: 560px; margin-top: 0;">
+
+<fieldset>
+<legend style="text-align: center;">WELCOME TO SDMCET</legend>
+
+<img src="sdmcet_logo.png" alt="Logo" class="login-logo">
+
+<div class="form-group">
+    <label for="role">Login As</label>
+    <select id="role" required>
+        <option value="" disabled selected>Select your role</option>
+        <option value="student">Student</option>
+        <option value="admin">Admin</option>
+    </select>
+
+    <label>USN / Username:</label>
+    <input type="text" id="username" placeholder="Enter USN or Username" required>
+</div>
+
+<div class="form-group">
+    <label>Password:</label>
+    <div class="password-container">
+        <input type="password" id="password" placeholder="Password" required>
+
+        <span class="toggle-eye" onclick="togglePassword()">
+            <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                <circle cx="12" cy="12" r="3"/>
+            </svg>
+        </span>
+    </div>
+</div>
+
+<p class="form-footer" id="signupText">
+    Don't have an account? <a href="sign_up.html">Sign up</a>
+</p>
+
+<div class="form-actions" style="margin-top: 18px;">
+    <button type="submit" class="btn btn-primary btn-block">Login</button>
+</div>
+
+</fieldset>
+</div>
+
+</form>
+
+<script>
+
+// Hide signup when Admin selected
+document.getElementById("role").addEventListener("change", function () {
+    const signup = document.getElementById("signupText");
+
+    if (this.value === "admin") {
+        signup.style.display = "none";
+    } else {
+        signup.style.display = "block";
+    }
+});
+
+// Login Logic
+document.getElementById("loginForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    let role = document.getElementById("role").value;
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
+
+    if(role === "admin"){
+        if(username === "admin" && password === "admin123"){
+            window.location.href = "dashboard_admin.html";
+        } else {
+            alert("Invalid Admin Credentials");
+        }
+    } 
+    else if(role === "student"){
+        // later you can connect DB
+        window.location.href = "dashboard_student.html";
+    }
+});
+
+// Password toggle
+function togglePassword(){
+    const password = document.getElementById("password");
+    const eyeIcon = document.getElementById("eyeIcon");
+
+    if(password.type === "password"){
+        password.type = "text";
+        eyeIcon.innerHTML = `
+            <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20C5 20 1 12 1 12"/>
+            <path d="M1 1l22 22"/>
+        `;
+    } else {
+        password.type = "password";
+        eyeIcon.innerHTML = `
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+            <circle cx="12" cy="12" r="3"/>
+        `;
+    }
+}
+
+</script>
+
+</body>
+</html>
